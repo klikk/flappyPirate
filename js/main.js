@@ -25,25 +25,25 @@ var states = Object.freeze({
 
 var currentstate;
 
-var gravity = 0.15;
+var gravity = 0.2;
 var velocity = 0;
 var position = 180;
 var rotation = 0;
-var jump = -2.6;
+var jump = -2;
 
 var soundRequired = 70;
 
 var score = 0;
 var highscore = 0;
 
-var pipeheight = 90;
+var pipeheight = 175;
 var pipewidth = 52;
 var pipes = new Array();
 
 var replayclickable = false;
 
 //sounds
-var volume = 20;
+var volume = 10;
 var soundJump = new buzz.sound("assets/sounds/sfx_wing.ogg");
 var soundScore = new buzz.sound("assets/sounds/sfx_point.ogg");
 var soundHit = new buzz.sound("assets/sounds/sfx_hit.ogg");
@@ -58,8 +58,8 @@ var loopPipeloop;
 $(document).ready(function() {
    if(window.location.search == "?debug")
       debugmode = true;
-   if(window.location.search == "?easy")
-      pipeheight = 200;
+   if(window.location.search == "?hard")
+      pipeheight = 110;
    
    //get the highscore
    var savedscore = getCookie("highscore");
@@ -287,7 +287,7 @@ function playerJump()
 {
    velocity = jump;
    //play jump sound
-   soundJump.stop();
+   //soundJump.stop();
    soundJump.play();
 }
 
@@ -551,9 +551,17 @@ function getLog() {
   return document.getElementById('mylog');
 }
 
+function getReq() {
+  return document.getElementById('myreq');
+}
+
 function processSound(val) {
   getLog().innerHTML = val + '\n<br>';
+  getReq().innerHTML = soundRequired + '\n<br>';
   if (val > soundRequired) {
     playerJump();
+    soundRequired = soundRequired + 0.5;
+  } else {
+    soundRequired = soundRequired - 0.2;
   }
 }
