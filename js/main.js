@@ -36,7 +36,7 @@ var soundRequired = 70;
 var score = 0;
 var highscore = 0;
 
-var pipeheight = 175;
+var pipeheight = 185;
 var pipewidth = 52;
 var pipes = new Array();
 
@@ -60,6 +60,8 @@ $(document).ready(function() {
       debugmode = true;
    if(window.location.search == "?hard")
       pipeheight = 110;
+  if(window.location.search == "?easy")
+    pipeheight = 20;
    
    //get the highscore
    var savedscore = getCookie("highscore");
@@ -257,16 +259,20 @@ function gameloop() {
    }
 }
 
-//Handle space bar
+//Handle keys
 $(document).keydown(function(e){
    //space bar!
-   if(e.keyCode == 32)
-   {
+   if(e.keyCode == 32) {
       //in ScoreScreen, hitting space should click the "replay" button. else it's just a regular spacebar hit
       if(currentstate == states.ScoreScreen)
          $("#replay").click();
       else
-         screenClick();
+        screenClick();
+        playerJump();
+   } else if(e.keyCode == 38) {
+     soundRequired = soundRequired + 10;
+   } else if(e.keyCode == 40) {
+     soundRequired = soundRequired - 10;
    }
 });
 
