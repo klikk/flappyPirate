@@ -3,6 +3,14 @@ Flappy Bird clone with pirate graphics and voice control
 
 --Initially forked from https://github.com/nebez/floppybird/ - Big Thanks
 
+NOTE
+-----------
+Please note that due to timeframe limitations html getUserMedia() (https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getUserMedia) was used which is a deprecated function, you will need to run the game either on a secure server or disable security in chrome, otherwise the game won't be able to process audio.
+You would still be able to control the game with the spacebar.
+
+#TODO: Convert the function to MediaDevices.getUserMedia() (https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)
+
+
 Original Readme:
 
 Floppy Bird
